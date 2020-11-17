@@ -2,6 +2,9 @@
 #include <iostream>
 #include <cassert>      //for assert()
 using namespace std;
+//a card has beans, total in deck value 
+//and chain value(chain value has coin value in it)
+
 /*
 enum bean { Blue, Chili, Stink, Green, soy, black, Red , garden };
 class Card {
