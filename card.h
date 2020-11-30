@@ -10,7 +10,6 @@ public:
 	virtual string getName() = 0;
 	virtual void print(ostream&) const = 0;
     
-	
     //friend function that prints any objects
     friend ostream& operator<<(std::ostream& o, const Card& c) {
 	    c.print(o);
