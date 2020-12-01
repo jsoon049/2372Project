@@ -1,3 +1,6 @@
+#include "card.cpp"
+#include "cardFactory.cpp"
+#include<string.h>
 // While there are still cards on the Deck if pause save game to file and exit For each Player
 // Display Table
 // Player draws top card from Deck If TradeArea is not empty
@@ -18,3 +21,10 @@
 // end
 // Draw two cards from Deck and add the cards to the player's hand (at the back).
 // end
+
+int main() {
+    // black b;
+    // if(b.getName() == "black") cout << "yes" <<endl;
+    // cout << b.getCardsPerCoin(3);
+    return 0;
+}

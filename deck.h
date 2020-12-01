@@ -1,13 +1,18 @@
-#define Deck_h
+#ifndef deck_h
+#define deck_h
 
-#include "Card.h"
 #include <vector>
-#include "CardFactory.h"
+#include "card.h"
+#include "cardFactory.h"
+
+class cardFactory;
 
 class Deck : public vector<Card*> {
 public:
-	Deck() = default;
-    //Deck(istream&, const CardFactory*)
-	//Card* draw();
-	friend ostream& operator<<(ostream&, const Deck&);
+	Deck(istream&, CardFactory*);
+	Card* draw();
+	friend ostream & operator << (ostream &, Deck);
+	Deck() {}; // default constructor
+	Deck(CardFactory*);
 };
+#endif

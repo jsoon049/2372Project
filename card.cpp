@@ -1,9 +1,8 @@
-#include "Card.h"
+#include "card.h"
 
 //**black bean class**//
 class black : public Card {
 public:
-	const static int TOTALINDECK = 10;
     //pass in the num of coins and return the number of cards needed
 	int getCardsPerCoin(int coins) {
 		if (coins == 1)
@@ -34,8 +33,6 @@ public:
 class Blue : public Card {
 
 public:
-	const static int TOTALINDECK = 20;
-
     //pass in the num of coins and return the number of cards needed
 	int getCardsPerCoin(int coins) {
 		if (coins == 1)
@@ -66,8 +63,6 @@ public:
 class Chili : public Card {
 
 public:
-	const static int TOTALINDECK = 18;
-
     //pass in the num of coins and return the number of cards needed
 	int getCardsPerCoin(int coins) {
 		if (coins == 1)
@@ -98,8 +93,6 @@ public:
 class garden : public Card {
 
 public:
-	const static int TOTALINDECK = 6;
-
     //pass in the num of coins and return the number of cards needed
 	int getCardsPerCoin(int coins) {
 		if (coins == 2)
@@ -124,8 +117,6 @@ public:
 class Green : public Card {
 
 public:
-	const static int TOTALINDECK = 14;
-
     //pass in the num of coins and return the number of cards needed
 	int getCardsPerCoin(int coins) {
 		if (coins == 1)
@@ -156,8 +147,6 @@ public:
 class Red : public Card {
 
 public:
-	const static int TOTALINDECK = 8;
-
     //pass in the num of coins and return the number of cards needed
 	int getCardsPerCoin(int coins) {
 		if (coins == 1)
@@ -188,8 +177,6 @@ public:
 class soy : public Card {
 
 public:
-	const static int TOTALINDECK = 12;
-
     //pass in the num of coins and return the number of cards needed
 	int getCardsPerCoin(int coins) {
 		if (coins == 1)
@@ -220,8 +207,6 @@ public:
 class Stink : public Card {
 
 public:
-	const static int TOTALINDECK = 16;
-
     //pass in the num of coins and return the number of cards needed
 	int getCardsPerCoin(int coins) {
 		if (coins == 1)
