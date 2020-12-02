@@ -3,7 +3,6 @@
 #include "card.h"
 
 class Hand : public vector<Card*> {
-private:
 
 
 public:

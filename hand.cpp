@@ -3,7 +3,11 @@
 #include <string>
 #include <iostream>
 
+//Question: do i need "*this"??? or is using "this" is enough
 //assume back of the vector is the top card on hand
+
+//constructor
+Hand::Hand(istream &is, CardFactory *cardfactory) {}
 
 //adds the card to the rear of the hand.
 Hand &Hand::operator+=(Card *card) {
@@ -32,16 +36,10 @@ Card* Hand ::operator[](int index) {
     return toBeRemoved;
 }
 
-//Not sure how to fix the following error under Hand::hand for friend function
 
 //The hand should print all the cards in order.
-/*
-Hand::Hand(std::ostream &output, CardFactory *cf) {
-
-    for (auto i:(*this)) { //loop thru all element in the vector of hand 
-        output<<i;
-        std::cout << ", ";
-        std::cout << i << ' '; std::cout << '\n';
-    }
+//copied from deck
+ostream & operator<<(ostream & os, Hand *h) {
+	for( auto card : *h) { card->print(os); os << " "; }
+    return os;
 }
-*/

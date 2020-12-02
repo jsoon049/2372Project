@@ -54,6 +54,8 @@
         "typeinfo": "cpp",
         "unordered_map": "cpp",
         "utility": "cpp",
-        "hashtable": "cpp"
+        "hashtable": "cpp",
+        "vector": "cpp",
+        "iterator": "cpp"
     }
 }
