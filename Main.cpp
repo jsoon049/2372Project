@@ -1,6 +1,7 @@
 #include "card.cpp"
 #include "cardFactory.cpp"
 #include <string.h>
+#include <sstream> 
 #include "chain.h"
 // While there are still cards on the Deck if pause save game to file and exit For each Player
 // Display Table
@@ -35,17 +36,27 @@ int main() {
     // cout << d;
 
     //TEST CHAIN
-    Chain<Blue> bchain;
-    Blue* bl = new Blue();
+    // Chain<Blue> bchain;
+    // Blue* bl = new Blue();
     // Green *g;
-    bchain+=(bl);
-    bchain+=(bl);
-    bchain+=(bl);
-    bchain+=(bl);
-    bchain+=(bl);
-    bchain+=(bl);
-    int result = bchain.sell();
-    cout << "res " << result << endl;
-    
+    // bchain+=(bl);
+    // bchain+=(bl);
+    // bchain+=(bl);
+    // bchain+=(bl);
+    // bchain+=(bl);
+    // bchain+=(bl);
+    // int result = bchain.sell();
+    // cout << "res " << result << endl;
+    // cout << bchain << endl;
+
+    //TEST RECONSTRCUT CHAIN 
+    Chain<black> savedChain;
+    black *b = new black();
+	auto cardFactory = CardFactory::getFactory();
+	for (int i = 0; i < 4; i++) savedChain += (b);
+	stringstream save;
+    save << savedChain;
+	auto loadedChain = Chain<black>(save, cardFactory);
+    cout << loadedChain << endl;
     return 0;
 }

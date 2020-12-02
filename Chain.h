@@ -7,29 +7,21 @@
 
 template <class T> class Chain : public ChainBase, public vector<T*> {
 public:
-	// default constructor 
 	Chain();
 	Chain(istream&, CardFactory*);
 	Chain<T>& operator+= (Card* card);
 	int sell();
-	friend ostream & operator << (ostream & sortie, Chain<T> c) {
-		//sortie << c.getType() << '\t';
-        sortie << c.type << '\t';
-		//if (c.getSize() > 0) {
-        if (c.size() > 0) {
-			//for (int i = 0; i< c.getSize(); i++)
-            for (int i = 0; i< c.size(); i++)
-                sortie << c.type.at(0);
+	//Insertion operator (friend) to print Chain on an std::ostream.
+	friend ostream & operator << (ostream & os, Chain<T> chain) {
+        os << chain.type << '\t'; // print full name of the bean before tab
+        if (chain.size() > 0) {
+            for (int i = 0; i< chain.size(); i++) os << chain.type.at(0); //print first letter of bean color
 		}
-		return sortie;
+		return os;
 	};
-	//void addCard(Card* );
-	//string getType();
 protected:
-	string type;
-	void print(ostream& os) const {
-		os << (*this);
-	};
+	string type; //string variable to store color of chain
+	void print(ostream& os) const { os << (*this); };
 };
 
 struct IllegalType : public exception {
@@ -38,61 +30,48 @@ struct IllegalType : public exception {
 	}
 };
 
-
+//default constructor 
 template<class T>
 inline Chain<T>::Chain() {
-	T temp;
-	type = temp.getName();
+	T chain_color;
+	type = chain_color.getName();
 }
 
+// Constructor which accepts an istream and reconstructs the chain from file when a game is resumed.
 template<class T>
-Chain<T>::Chain(istream & in , CardFactory * cf) {
+Chain<T>::Chain(istream & is, CardFactory * cardFactory) {
     int i = 0;
-	string chainTitle;
-	getline(in, chainTitle, '\t');
-	char type[256];
-	in.getline(type, 256);
-	// while (type != NULL) {
-	// 	if (type != ' ') {
-	// 		Card* cardToAdd = ((*cf).getCardType(type));
-	// 		(*this).push_back(cardToAdd);
-	// 	}															
-	// }
-
+	string chainName;
+	getline(is, chainName, '\t'); //Get text before tab
+	char arr[100];
+	is.getline(arr, 100);
+	while (arr[i] != '\0') {
+		Card* c = cardFactory->getCardType(arr[i]); //Retrieve chain type
+		type = c->getName(); //Set variable type to chain type
+		*this += c;
+		i++;								
+	}
 }
 
+// Adds a card to the Chain
 template<class T>
 Chain<T>& Chain<T>::operator+=(Card* card) {
-    if(type.compare((*card).getName()) == 0){
-		T* temp = new T();
-		this->push_back(temp);
+    if(type.compare((*card).getName()) == 0){ // Check if the run-time type matches chain type
+		T* addCard = new T();
+		this->push_back(addCard); //If types match add card
 	}
-	else throw IllegalType();
+	else throw IllegalType(); //If types don't match throw exception
 	return *this;
 }
 
-
+// Counts the number cards in the current chain and returns the number coins
 template<class T>
 int Chain<T>::sell()
 {
-	T temp;
-	for (int cns = 4; cns > 0; cns--) {
-        if (this->size() >= temp.getCardsPerCoin(cns)) return cns;
+	T chain;
+	for (int numCoins=4; numCoins>0; numCoins--) {
+        if (this->size() >= chain.getCardsPerCoin(numCoins)) return numCoins;
 	}
 	return 0;
 }
-
-// template<class T>
-// void Chain<T>::addCard(Card * card)
-// {
-// 	(*this) += card;
-// }
-
-
-// template<class T>
-// inline string Chain<T>::getType()
-// {
-// 	return type;
-// }
-
 #endif 
