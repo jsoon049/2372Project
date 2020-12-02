@@ -15,5 +15,4 @@ public:
     Card* top();  //returns but does not remove the top card from the player's hand.                    
     Card* operator[](int);      //returns and removes the Card at a given index.
     friend ostream & operator << (ostream &, Hand);
-    void print(std::ostream &out);
 };
