@@ -1,5 +1,4 @@
 #include "cardFactory.h"
-#include "card.cpp"
 #include "deck.cpp"
  
 // Constructor used to create all the cards
@@ -61,7 +60,7 @@ Card* CardFactory::getCardType(char bean) {
 	Card * card = NULL;
 	if (bean == 'b') card = new black();
 	else if (bean == 'B') card = new Blue();
-	else if (bean ==' C') card = new Chili();
+	else if (bean == 'C') card = new Chili();
 	else if (bean == 'g') card = new garden();
 	else if (bean == 'G') card = new Green();
 	else if (bean == 'R') card = new Red();
@@ -77,7 +76,7 @@ Deck CardFactory::setDeck(istream &in)
 	char cardType[256];
 	in.getline(cardType, 256);
 	int i = 0;
-	while (cardType[i] != NULL) {
+	while (cardType[i] != '\0') {
 		Card* cardToAdd = getCardType(cardType[i]);
 		deck->push_back(cardToAdd);									
 		i++;

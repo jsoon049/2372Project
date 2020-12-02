@@ -11,7 +11,7 @@ class Deck : public vector<Card*> {
 public:
 	Deck(istream&, CardFactory*);
 	Card* draw();
-	friend ostream & operator << (ostream &, Deck);
+	friend ostream & operator << (ostream &, Deck d);
 	Deck() {}; // default constructor
 	Deck(CardFactory*);
 };

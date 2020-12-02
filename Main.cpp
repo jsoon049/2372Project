@@ -26,5 +26,8 @@ int main() {
     // black b;
     // if(b.getName() == "black") cout << "yes" <<endl;
     // cout << b.getCardsPerCoin(3);
+    CardFactory *f = new CardFactory();
+    Deck *d = new Deck(f);
+    cout << d;
     return 0;
 }
