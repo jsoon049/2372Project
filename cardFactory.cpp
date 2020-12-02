@@ -3,55 +3,55 @@
  
 // Constructor used to create all the cards
 CardFactory::CardFactory() { 		
-	Card * newCard;
-	deck = new Deck();
+	Card * card;
+	d = new Deck();
 	for (int i = 0; i < 10; i++) { 
-		newCard = new black();   
-		deck->push_back(newCard);
+		card = new black();   
+		d->push_back(card);
 	}
 	for (int i = 0; i < 20; i++) {
-		newCard = new Blue();
-		deck->push_back(newCard);
+		card = new Blue();
+		d->push_back(card);
 	}
 	for (int i = 0; i < 18; i++) {
-		newCard = new Chili();
-		deck->push_back(newCard);
+		card = new Chili();
+		d->push_back(card);
 	}
 	for (int i = 0; i < 6; i++) {
-		newCard = new garden();
-		deck->push_back(newCard);
+		card = new garden();
+		d->push_back(card);
 	}
 	for (int i = 0; i < 14; i++) {
-		newCard = new Green();
-		deck->push_back(newCard);
+		card = new Green();
+		d->push_back(card);
 	}
 	for (int i = 0; i < 8; i++) {
-		newCard = new Red();
-		deck->push_back(newCard);
+		card = new Red();
+		d->push_back(card);
 	}
 	for (int i = 0; i < 12; i++) {
-		newCard = new soy();
-		deck->push_back(newCard);
+		card = new soy();
+		d->push_back(card);
 	}
 	for (int i = 0; i < 16; i++) {
-		newCard = new Stink();
-		deck->push_back(newCard);
+		card = new Stink();
+		d->push_back(card);
 	}
 }
 
 // Returns a pointer to the only instance of CardFactory
 CardFactory * CardFactory::getFactory() 	
 {
-	static CardFactory cf; // Create static instance of CardFactory
-	return &cf;
+	static CardFactory cardfactory; // Create static instance of CardFactory
+	return &cardfactory;
 }
 
 // Returns a shuffled deck with all 104 bean cards. The deck is shuffled using std::shuffle
 Deck CardFactory::getDeck()
 {
-	unsigned seed = chrono::system_clock::now().time_since_epoch().count(); // obtain a time-based seed -- source: cplusplus.com/reference/algorithm/shuffle/
-	shuffle(deck->begin(), deck->end(), default_random_engine(seed));
-	return *deck;
+	unsigned seed = chrono::system_clock::now().time_since_epoch().count(); // obtain a time-based seed
+	shuffle(d->begin(), d->end(), default_random_engine(seed));
+	return *d;
 }
 
 // **HELPER FUNCTIONS** //
@@ -70,16 +70,16 @@ Card* CardFactory::getCardType(char bean) {
 }
 
 // Helper function used when we are loading out deck from file
-Deck CardFactory::setDeck(istream &in)		
+Deck CardFactory::auxLoadDeck(istream &is)		
 {
-	deck = new Deck();
-	char cardType[256];
-	in.getline(cardType, 256);
 	int i = 0;
-	while (cardType[i] != '\0') {
-		Card* cardToAdd = getCardType(cardType[i]);
-		deck->push_back(cardToAdd);									
+	d = new Deck();
+	char type[256];
+	is.getline(type, 256);
+	while (type[i] != '\0') {
+		Card* addedCard = getCardType(type[i]);
+		d->push_back(addedCard);									
 		i++;
 	}
-	return *deck;
+	return *d;
 }
