@@ -1,6 +1,7 @@
 #include "card.cpp"
 #include "cardFactory.cpp"
-#include<string.h>
+#include <string.h>
+#include "chain.h"
 // While there are still cards on the Deck if pause save game to file and exit For each Player
 // Display Table
 // Player draws top card from Deck If TradeArea is not empty
@@ -23,11 +24,28 @@
 // end
 
 int main() {
+    //TEST CARD TYPES
     // black b;
     // if(b.getName() == "black") cout << "yes" <<endl;
     // cout << b.getCardsPerCoin(3);
-    CardFactory *f = new CardFactory();
-    Deck *d = new Deck(f);
-    cout << d;
+
+    //TEST DECK CONSTRCUTION
+    // CardFactory *f = new CardFactory();
+    // Deck *d = new Deck(f);
+    // cout << d;
+
+    //TEST CHAIN
+    Chain<Blue> bchain;
+    Blue* bl = new Blue();
+    // Green *g;
+    bchain+=(bl);
+    bchain+=(bl);
+    bchain+=(bl);
+    bchain+=(bl);
+    bchain+=(bl);
+    bchain+=(bl);
+    int result = bchain.sell();
+    cout << "res " << result << endl;
+    
     return 0;
 }

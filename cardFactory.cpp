@@ -40,15 +40,13 @@ CardFactory::CardFactory() {
 }
 
 // Returns a pointer to the only instance of CardFactory
-CardFactory * CardFactory::getFactory() 	
-{
+CardFactory * CardFactory::getFactory() {
 	static CardFactory cardfactory; // Create static instance of CardFactory
 	return &cardfactory;
 }
 
 // Returns a shuffled deck with all 104 bean cards. The deck is shuffled using std::shuffle
-Deck CardFactory::getDeck()
-{
+Deck CardFactory::getDeck() {
 	unsigned seed = chrono::system_clock::now().time_since_epoch().count(); // obtain a time-based seed
 	shuffle(d->begin(), d->end(), default_random_engine(seed));
 	return *d;
@@ -70,8 +68,7 @@ Card* CardFactory::getCardType(char bean) {
 }
 
 // Helper function used when we are loading out deck from file
-Deck CardFactory::auxLoadDeck(istream &is)		
-{
+Deck CardFactory::auxLoadDeck(istream &is) {
 	int i = 0;
 	d = new Deck();
 	char type[256];
