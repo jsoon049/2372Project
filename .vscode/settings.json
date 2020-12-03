@@ -56,6 +56,7 @@
         "utility": "cpp",
         "hashtable": "cpp",
         "vector": "cpp",
-        "iterator": "cpp"
+        "iterator": "cpp",
+        "queue": "cpp"
     }
 }

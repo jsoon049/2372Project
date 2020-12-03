@@ -3,6 +3,7 @@
 #include <string.h>
 #include <sstream> 
 #include "chain.h"
+#include "hand.cpp"
 // While there are still cards on the Deck if pause save game to file and exit For each Player
 // Display Table
 // Player draws top card from Deck If TradeArea is not empty
@@ -25,17 +26,17 @@
 // end
 
 int main() {
-    //TEST CARD TYPES
+    // //TEST CARD TYPES
     // black b;
     // if(b.getName() == "black") cout << "yes" <<endl;
     // cout << b.getCardsPerCoin(3);
 
-    //TEST DECK CONSTRCUTION
+    // //TEST DECK CONSTRCUTION
     // CardFactory *f = new CardFactory();
     // Deck *d = new Deck(f);
     // cout << d;
 
-    //TEST CHAIN
+    // //TEST CHAIN
     // Chain<Blue> bchain;
     // Blue* bl = new Blue();
     // Green *g;
@@ -49,14 +50,40 @@ int main() {
     // cout << "res " << result << endl;
     // cout << bchain << endl;
 
-    //TEST RECONSTRCUT CHAIN 
-    Chain<black> savedChain;
-    black *b = new black();
-	auto cardFactory = CardFactory::getFactory();
-	for (int i = 0; i < 4; i++) savedChain += (b);
-	stringstream save;
-    save << savedChain;
-	auto loadedChain = Chain<black>(save, cardFactory);
-    cout << loadedChain << endl;
+    // //TEST RECONSTRCUT CHAIN 
+    // Chain<black> savedChain;
+    // black *b = new black();
+	// auto cardFactory = CardFactory::getFactory();
+	// for (int i = 0; i < 4; i++) savedChain += (b);
+	// stringstream save;
+    // save << savedChain;
+	// auto loadedChain = Chain<black>(save, cardFactory);
+    // cout << loadedChain << endl;
+
+    // //TEST HAND
+    // Hand h;
+    // Red *r = new Red();
+    // soy *s = new soy();
+    // garden *gar = new garden();
+    // h += r;
+    // h += s;
+    // h += gar;
+    // //cout << h << endl;
+    // //TEST HAND RECONSTRUCT
+    // auto cardFactory = CardFactory::getFactory();
+	// stringstream save;
+    // save << h;
+	// auto filehand = Hand(save, cardFactory);
+    // cout << filehand << endl;
+    // //TEST HAND FUNCTIONS
+    // Card *c = h.top();
+    // cout << c->getName() << endl;
+    // Card *c1 = h.play();
+    // cout << c1->getName() << endl;
+    // cout << h << endl;
+    // Card *c2 = h[1];
+    // cout << c2->getName() << endl;
+    // cout << h << endl;
+
     return 0;
 }
