@@ -57,6 +57,7 @@
         "hashtable": "cpp",
         "vector": "cpp",
         "iterator": "cpp",
-        "queue": "cpp"
+        "queue": "cpp",
+        "list": "cpp"
     }
 }

@@ -3,6 +3,7 @@
 #include "chain.h"
 #include "hand.cpp"
 #include "discardPile.cpp"
+#include "tradeArea.cpp"
 // While there are still cards on the Deck if pause save game to file and exit For each Player
 // Display Table
 // Player draws top card from Deck If TradeArea is not empty
@@ -85,28 +86,47 @@ int main() {
     // cout << c2->getName() << endl;
     // cout << h << endl;
 
-    //TEST DISCARD PILE
-    DiscardPile dpile;
-    Stink *st = new Stink();
-    black *b2 = new black();
-    Green *g2 = new Green();
-    dpile += st;
-    dpile += b2;
-    dpile += g2;
-    //cout << dpile << endl; // Print only last element
-    dpile.print(cout);
-    auto cardFactory = CardFactory::getFactory();
-	stringstream so;
-    so << dpile;
-	auto dpile2 = DiscardPile(so, cardFactory);
-    dpile2.print(cout); // only returns top card b/c of insertion operator
-    //TEST DISCARD FUNCTIONS
-    Card *c5 = dpile.top();
-    c5->print(cout);
-    cout << endl;
-    Card *c6 = dpile.pickUp();
-    c6->print(cout);
-    cout << endl;
-    dpile.print(cout); // Print all elements
+    // //TEST DISCARD PILE
+    // DiscardPile dpile;
+    // Stink *st = new Stink();
+    // black *b2 = new black();
+    // Green *g2 = new Green();
+    // dpile += st;
+    // dpile += b2;
+    // dpile += g2;
+    // //cout << dpile << endl; // Print only last element
+    // dpile.print(cout);
+    // auto cardFactory = CardFactory::getFactory();
+	// stringstream so;
+    // so << dpile;
+	// auto dpile2 = DiscardPile(so, cardFactory);
+    // dpile2.print(cout); // only returns top card b/c of insertion operator
+    // //TEST DISCARD FUNCTIONS
+    // Card *c5 = dpile.top();
+    // c5->print(cout);
+    // cout << endl;
+    // Card *c6 = dpile.pickUp();
+    // c6->print(cout);
+    // cout << endl;
+    // dpile.print(cout); // Print all elements
+
+    // //TEST TRADE AREA
+    // Card *g1 = new Green(), *g2 = new Green(), *r = new Red();
+    // Card *g3 = new Green(), *r2 = new Red();
+	// auto ta = TradeArea();
+	// ta += g1; 
+    // cout << ta.legal(g2) << endl;
+    // cout << ta.legal(r) << endl;
+    // ta += r;
+    // ta += g2;
+    // stringstream save;
+    // save << ta;
+    // auto ta2 = TradeArea(save, CardFactory::getFactory());
+    // cout << ta << endl;
+    // cout << ta2 << endl;
+    // cout << ta.numCards() << endl;
+    // ta.trade(g3->getName()); //trade from front of list
+    // cout << ta << endl;
+    
     return 0;
 }
