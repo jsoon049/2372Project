@@ -1,4 +1,5 @@
 #include "hand.h"
+//** TOP CARD IS FRONT OF QUEUE **//
 
 // Constructor which accepts an istream and reconstruct the Hand from file.
 Hand::Hand( istream& is, CardFactory* cardFactory ) {

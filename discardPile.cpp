@@ -1,25 +1,34 @@
+#include "cardFactory.cpp"
 #include "discardPile.h"
-#include <iostream>
 
-//constructor
+// Constructor which accepts an istream and reconstructs the DiscardPile from file.
 DiscardPile::DiscardPile(istream &is, CardFactory *cardfactory) { 
-    *this = (cardfactory->auxLoadDeck(is)); 
+    // char discard[300];
+	// is.getline(discard, 300);
+    // int i = 0;
+	// while (discard[i] != '\0') {
+    //     Card *addDiscard = cardfactory->getCardType(discard[i]);
+	// 	if(addDiscard != NULL) { // if card exists
+    //         addDiscard->print(cout);
+    //         (*this).push_back(addDiscard); // add card to deck						
+	// 	}			
+	// 	i++;								
+	// }
+    char discard;
+	while (is >> discard) {
+		this->push_back(cardfactory->getCardType(discard));
+	}
 }
 
-
-//discards the card to the pile
-//add the waste card to discard
-DiscardPile & DiscardPile::operator+=(Card *card)
-{
-	(*this).push_back(card);
+// Discards the card to the pile 
+DiscardPile & DiscardPile::operator+=(Card *card) {
+	(*this).push_back(card); // Add card to top of discard pile
 	return *this;
 }
 
-//returns and removes the top card from the discard pile.
-Card *DiscardPile::pickUp()
-{
-    // Draws top card from pile if not empty, else print error message
-	if (this->empty()) {
+// Returns and removes the top card from the discard pile.
+Card *DiscardPile::pickUp() {
+	if (this->empty()) { // Check if deck is empty
 		cout << "Error: Discard pile is empty!" << endl;
 		return nullptr;
 	}
@@ -30,23 +39,21 @@ Card *DiscardPile::pickUp()
 	}
 }
 
-//returns but does not remove the top card from the discard pile
-Card *DiscardPile::top(){
-    return (*this).back();
-}
-//to insert all the cards in the DiscardPile to an std::ostream
+// Returns but does not remove the top card from the discard pile
+Card *DiscardPile::top(){ return (*this).back(); }
+
+// Insert all the cards in the DiscardPile to an std::ostream.
 void DiscardPile::print(ostream &output) {
-    for (auto i:(*this)) { //loop thru all element in the vector of discardPile
-        output<<i;
-        std::cout << ", ";
-        std::cout << i << ' '; std::cout << '\n';
+     for( auto card : *this ) { 
+        card->print(output); // Print first letter of all cards
+        output<< " ";
     }
+    cout << endl;
 }
 
-//friend function to insert only the top card of the discard pile to an std::ostream.
-//copied from deck
-ostream & operator<<(ostream & os, DiscardPile *d) {
-	for( auto card : *d ) { card->print(os); os << " "; }
+// Insertion operator (friend) to insert only the top card of the discard pile to an std::ostream.
+ostream & operator<<(ostream & os, DiscardPile d) {
+    if(!d.empty()) d.top()->print(os); // Print first letter of top card
     return os;
 }
 

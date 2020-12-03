@@ -6,6 +6,7 @@ Deck::Deck(istream &is, CardFactory *cardfactory) {
 }
 
 // Draws top card from deck if not empty, else print error message
+//** TOP CARD IS BACK OF VECTOR **//
 Card* Deck::draw() {
 	if (this->empty()) {
 		cout << "Error: Deck is empty!" << endl;

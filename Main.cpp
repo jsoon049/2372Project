@@ -1,9 +1,9 @@
 #include "card.cpp"
-#include "cardFactory.cpp"
 #include <string.h>
 #include <sstream> 
 #include "chain.h"
 #include "hand.cpp"
+#include "discardPile.cpp"
 // While there are still cards on the Deck if pause save game to file and exit For each Player
 // Display Table
 // Player draws top card from Deck If TradeArea is not empty
@@ -26,11 +26,6 @@
 // end
 
 int main() {
-    // //TEST CARD TYPES
-    // black b;
-    // if(b.getName() == "black") cout << "yes" <<endl;
-    // cout << b.getCardsPerCoin(3);
-
     // //TEST DECK CONSTRCUTION
     // CardFactory *f = CardFactory::getFactory();
     // Deck *d = new Deck(f);
@@ -42,7 +37,6 @@ int main() {
     // s << d; 
     // auto *deck2 = new Deck(s, f);
     // cout << deck2 << endl;
-
 
     // //TEST CHAIN
     // Chain<Blue> bchain;
@@ -66,7 +60,6 @@ int main() {
     // save << savedChain;
 	// auto loadedChain = Chain<black>(save, cardFactory);
     // cout << loadedChain << endl;
-
 
     // //TEST HAND
     // Hand h;
@@ -93,5 +86,29 @@ int main() {
     // cout << c2->getName() << endl;
     // cout << h << endl;
 
+    
+    //TEST DISCARD PILE
+    DiscardPile dpile;
+    Stink *st = new Stink();
+    black *b2 = new black();
+    Green *g2 = new Green();
+    dpile += st;
+    dpile += b2;
+    dpile += g2;
+    //cout << dpile << endl; // Print only last element
+    dpile.print(cout);
+    auto cardFactory = CardFactory::getFactory();
+	stringstream so;
+    so << dpile;
+	auto dpile2 = DiscardPile(so, cardFactory);
+    dpile2.print(cout); // only returns top card b/c of insertion operator
+    //TEST DISCARD FUNCTIONS
+    Card *c5 = dpile.top();
+    c5->print(cout);
+    cout << endl;
+    Card *c6 = dpile.pickUp();
+    c6->print(cout);
+    cout << endl;
+    dpile.print(cout); // Print all elements
     return 0;
 }

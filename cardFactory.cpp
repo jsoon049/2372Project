@@ -55,7 +55,7 @@ Deck CardFactory::getDeck() {
 // **HELPER FUNCTIONS** //
 // Helper function used to retrieve a specific card
 Card* CardFactory::getCardType(char bean) {		
-	Card * card = NULL;
+	Card * card = NULL; 
 	if (bean == 'b') card = new black();
 	else if (bean == 'B') card = new Blue();
 	else if (bean == 'C') card = new Chili();
