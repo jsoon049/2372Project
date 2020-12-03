@@ -1,7 +1,9 @@
 #include "deck.h"
 
 // Constructor which accepts an istream and reconstructs the deck from file.
-Deck::Deck(istream &is, CardFactory *cardfactory) { *this = (cardfactory->auxLoadDeck(is)); }
+Deck::Deck(istream &is, CardFactory *cardfactory) { 
+	*this = cardfactory->auxLoadDeck(is); 
+}
 
 // Draws top card from deck if not empty, else print error message
 Card* Deck::draw() {

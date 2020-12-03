@@ -32,9 +32,17 @@ int main() {
     // cout << b.getCardsPerCoin(3);
 
     // //TEST DECK CONSTRCUTION
-    // CardFactory *f = new CardFactory();
+    // CardFactory *f = CardFactory::getFactory();
     // Deck *d = new Deck(f);
-    // cout << d;
+    // cout << d << endl;
+    // //TEST IOSTREAM DECK
+    // stringstream s;
+    // cout << (d->draw())->getName() << endl;
+    // cout << (d->draw())->getName() << endl;
+    // s << d; 
+    // auto *deck2 = new Deck(s, f);
+    // cout << deck2 << endl;
+
 
     // //TEST CHAIN
     // Chain<Blue> bchain;
@@ -49,8 +57,7 @@ int main() {
     // int result = bchain.sell();
     // cout << "res " << result << endl;
     // cout << bchain << endl;
-
-    // //TEST RECONSTRCUT CHAIN 
+    // //TEST IOSTREAM CHAIN 
     // Chain<black> savedChain;
     // black *b = new black();
 	// auto cardFactory = CardFactory::getFactory();
@@ -59,6 +66,7 @@ int main() {
     // save << savedChain;
 	// auto loadedChain = Chain<black>(save, cardFactory);
     // cout << loadedChain << endl;
+
 
     // //TEST HAND
     // Hand h;
@@ -69,7 +77,7 @@ int main() {
     // h += s;
     // h += gar;
     // //cout << h << endl;
-    // //TEST HAND RECONSTRUCT
+    // //TEST HAND IOSTREAM
     // auto cardFactory = CardFactory::getFactory();
 	// stringstream save;
     // save << h;

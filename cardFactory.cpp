@@ -71,11 +71,13 @@ Card* CardFactory::getCardType(char bean) {
 Deck CardFactory::auxLoadDeck(istream &is) {
 	int i = 0;
 	d = new Deck();
-	char type[256];
-	is.getline(type, 256);
-	while (type[i] != '\0') {
-		Card* addedCard = getCardType(type[i]);
-		d->push_back(addedCard);									
+	char cardType[300]; // array used to stored all cards in deck
+	is.getline(cardType, 300);
+	while (cardType[i] != '\0') {
+		Card* addedCard = getCardType(cardType[i]); // get card type
+		if(addedCard != NULL) { // if card exists
+			d->push_back(addedCard); // add card to deck						
+		}			
 		i++;
 	}
 	return *d;
