@@ -5,7 +5,7 @@
 #include "cardFactory.h"
 #include "card.h"
 
-class DiscardPile : public vector<Card*>   {
+class DiscardPile : public vector<Card*> {
 public:
     DiscardPile(){}; // default constructor
     DiscardPile(istream&,CardFactory*);

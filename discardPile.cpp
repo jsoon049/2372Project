@@ -3,21 +3,8 @@
 
 // Constructor which accepts an istream and reconstructs the DiscardPile from file.
 DiscardPile::DiscardPile(istream &is, CardFactory *cardfactory) { 
-    // char discard[300];
-	// is.getline(discard, 300);
-    // int i = 0;
-	// while (discard[i] != '\0') {
-    //     Card *addDiscard = cardfactory->getCardType(discard[i]);
-	// 	if(addDiscard != NULL) { // if card exists
-    //         addDiscard->print(cout);
-    //         (*this).push_back(addDiscard); // add card to deck						
-	// 	}			
-	// 	i++;								
-	// }
     char discard;
-	while (is >> discard) {
-		this->push_back(cardfactory->getCardType(discard));
-	}
+	while (is >> discard) { this->push_back(cardfactory->getCardType(discard)); }
 }
 
 // Discards the card to the pile 

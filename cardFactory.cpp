@@ -1,5 +1,6 @@
 #include "cardFactory.h"
 #include "deck.cpp"
+#include "card.cpp"
  
 // Constructor used to create all the cards
 CardFactory::CardFactory() { 		

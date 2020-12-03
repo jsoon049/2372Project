@@ -1,4 +1,3 @@
-#include "card.cpp"
 #include <string.h>
 #include <sstream> 
 #include "chain.h"
@@ -86,7 +85,6 @@ int main() {
     // cout << c2->getName() << endl;
     // cout << h << endl;
 
-    
     //TEST DISCARD PILE
     DiscardPile dpile;
     Stink *st = new Stink();
