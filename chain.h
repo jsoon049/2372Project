@@ -4,11 +4,11 @@
 #include "chainBase.h"
 #include <exception>
 
-class IllegalType : public exception {
-    const char * err () const throw () { 
-        return "Type Error: Card type does not match chain type!"; 
-    }
-} IllegalType;
+// class IllegalType : public exception {
+//     const char * err () const throw () { 
+//         return "Type Error: Card type does not match chain type!"; 
+//     }
+// } IllegalType;
 
 template <class T>
 class Chain : public ChainBase {
@@ -45,7 +45,7 @@ public:
             T* addedCard = new T();
             cardsInChain.push_back(addedCard);
         }
-        else throw IllegalType; //If card type does not match chain type throw exception
+        else throw Card::IllegalType(); //If card type does not match chain type throw exception
         return *this;
     }
 

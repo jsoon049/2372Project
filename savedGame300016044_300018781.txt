@@ -1,0 +1,20 @@
+Player1 
+Name : a
+Coins : 0
+Chains : 
+Empty chain
+Empty chain
+Hand : g G b b S 
+
+Player2 
+Name : b
+Coins : 0
+Chains : 
+Empty chain
+Empty chain
+Hand : C C C G R 
+
+DiscardPile : 
+TradeArea : 
+Deck : C s C B s s S G S g S B S S S G B G s B C S G b b B b C C C S B s G R B C G g S s B B B C B B g s G B b b s C G G g G S R S s B B s R C b C R C b R B s B C R S G R s S S b B B C C S G B g 
+done

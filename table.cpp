@@ -35,9 +35,9 @@ Table::Table(istream& in, CardFactory* cardfactory) {
                 deck = Deck(sBuff, cardfactory);
                 break;
             }
-            //if(firstWord == "done") break; // Signifies end of file
+            if(firstWord == "done") break; // Signifies end of file
         }
-        //if(firstWord == "done") break;
+        if(firstWord == "done") break;
     }
 }
 
@@ -101,11 +101,17 @@ ostream& operator<<(ostream& out, Table& _table) {
  */
 void Table::printAll(ostream& out) {
     out << "Player1 " << endl << p1; // Print player1 info
-    out << "Hand : "; p1.printHand(out, true); out << endl << endl; // Print all cards in player1 hand 
+    out << "Hand : "; 
+    p1.printHand(out, true); // Print all cards in player1 hand 
+    out << endl << endl; 
     out << "Player2 " << endl << p2; // Print player2 info
-    out << "Hand : "; p2.printHand(out, true); out << endl << endl; // Print all cards in player2 hand 
-    out << "DiscardPile : "; dPile.print(out); // Print all cards in discardPile
+    out << "Hand : "; 
+    p2.printHand(out, true); // Print all cards in player2 hand 
+    out << endl << endl; 
+    out << "DiscardPile : "; 
+    dPile.print(out); // Print all cards in discardPile
+    out << endl; 
     out << "TradeArea : " << tArea << endl; // Print all cards in tradeArea
     out << "Deck : " << deck << endl; // Print all cards in deck
-    //out << "done"; // Print done to show end of file
+    out << "done" << endl; // Print done to show end of file
 }

@@ -15,6 +15,11 @@ public:
 	    c.print(o);
 	    return o;
     }
+	struct IllegalType : public exception {
+    	const char * err () const throw () { 
+        	return "Type Error: Card type does not match chain type!"; 
+    	}
+	};
 };
 #endif
 
