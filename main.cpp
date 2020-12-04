@@ -48,6 +48,19 @@ void addToChain(Player& p, Table& table, int index, Card* cardToChain) {
             cout << "Enter chain number that you want to add " << cardToChain->getName() << " bean to. (Choices are 0,1,2)" << endl;
         }
         cin >> index;
+        while (!cin) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            if(p.getMaxNumChains() == 2) {
+                cout << "You currently own two chains." << endl;
+                cout << "Enter chain number that you want to add " << cardToChain->getName() << " bean to. (Choices are 0,1)" << endl;
+            }
+            else {
+                cout << "You currently own three chains." << endl;
+                cout << "Enter chain number that you want to add " << cardToChain->getName() << " bean to. (Choices are 0,1,2)" << endl;
+            }
+            cin >> index;
+        }
     }
     ChainBase* chain = &p[index];
     if(chain->isEmpty()) p.addChain(index, cardToChain);
