@@ -30,7 +30,7 @@ public:
 
     //Helper functions
     void addChain(const int, Card*); //old startChain
-    ChainBase* getChainType(const string, istream&, CardFactory*);
+    ChainBase* getChainType(const string, istream&, CardFactory*); //old getChainTemplate
 };
 
 #endif

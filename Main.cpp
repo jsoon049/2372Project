@@ -139,14 +139,15 @@ int main() {
         Blue *B1 = new Blue();
         (pl.hand)+=B1;
     }
-    //pl.printHand(cout, true);
+    pl.printHand(cout, true);
+    cout << endl;
     Card *r1 = new Red(), *s1 = new soy();
     pl.addChain(0,r1);
     pl.addChain(1,s1);
-    //cout << pl << endl;
+    cout << pl << endl;
     stringstream save;
     save << pl;
     Player pl2 = Player(save, CardFactory::getFactory());
-    cout << endl << pl2 << endl;
+    cout << pl2 << endl;
     return 0;
 }
