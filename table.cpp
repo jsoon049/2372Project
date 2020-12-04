@@ -1,43 +1,32 @@
 #include "table.h"
 #include "player.cpp"
 
-// // Used for testing
-// Table::Table(Player _p1, Player _p2, Deck _d, DiscardPile _dp, TradeArea _ta) { 
-//     p1 = _p1;
-//     p2 = _p2;
-//     deck = _d;
-//     dPile = _dp;
-//     tArea = _ta;
-// }
-
 // Constructor which accepts an istream and reconstruct the Table from file.
 Table::Table(istream& in, CardFactory* cardfactory) {
     string firstWord; // Stores first firstWord of each line
     string text; // Stores each line
-    string temp; // Used to store second word of line, which is a colon
+    string secondWord; // Used to store second word of line
     while(getline(in, text)) { // Extract text until newline is found
         istringstream sBuff(text); // String buffer containing text variable
         while(sBuff >> firstWord) {
             if(firstWord == "Player1") { p1 = *new Player(in, cardfactory); break; }
             if(firstWord == "Player2") { p2 = *new Player(in, cardfactory); break; }
             if(firstWord == "DiscardPile") {
-                sBuff >> temp;
+                sBuff >> secondWord;
                 dPile = DiscardPile( sBuff, cardfactory);
                 break;
             }
             if(firstWord == "TradeArea") {
-                sBuff >> temp;
+                sBuff >> secondWord;
                 tArea = TradeArea( sBuff, cardfactory);
                 break;
             }
             if(firstWord == "Deck") {
-                sBuff >> temp;
+                sBuff >> secondWord;
                 deck = Deck(sBuff, cardfactory);
                 break;
             }
-            if(firstWord == "done") break; // Signifies end of file
         }
-        if(firstWord == "done") break;
     }
 }
 
@@ -75,30 +64,8 @@ ostream& operator<<(ostream& out, Table& _table) {
     return out;
 }
 
-/*
- *  prints the following to file as an example
- *  Player1
- *  Name: Adam
- *  Coin(s): 4
- *  Chains
- *  0 -  Malachite : M M M M M
- *  1 - Amethyst : A A
- *  Hand : A M Q R T R
- *
- *  Player2
- *  Name: Betty
- *  Coin(s): 7
- *  Chains
- *  0 - Ruby : R R R R
- *  1 - Quartz : Q Q Q Q Q Q Q
- *  2 - Obsidian : O O O O O
- *  Hand : M A T T A M
-
- *  TradeArea : O E A E E A O O A O O E E A A A A O
- *  DiscardPile : A O Q T R M M T Q O E H Q T E M A
- *  Deck : etc...
- *  end
- */
+// **Helper Function **//
+// Prints the full table content to an std::ostream. Used when we want to print the whole table to a file during pause.
 void Table::printAll(ostream& out) {
     out << "Player1 " << endl << p1; // Print player1 info
     out << "Hand : "; 

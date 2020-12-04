@@ -1,9 +1,7 @@
 #include "card.h"
 #include "cardFactory.h"
 
-// class ChainBase;
-// ostream& operator<<( ostream&, const ChainBase& );
-
+// ChainBase is an abstract chain interface used to reference chains of any type from the Player class
 class ChainBase { 
 protected:
     bool base = true; // true if object is of type ChainBase. False if object is of type Chain<T>

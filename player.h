@@ -4,9 +4,6 @@
 #include "hand.h"
 #include <sstream>
 
-// class Player;
-// ostream& operator<<( ostream&, const Player& );
-
 class Player {
 protected:
     string playerName;
@@ -29,8 +26,8 @@ public:
     friend ostream& operator<<(ostream&, const Player&);
 
     //Helper functions
-    void addChain(const int, Card*); //old startChain
-    ChainBase* getChainType(const string, istream&, CardFactory*); //old getChainTemplate
+    ChainBase* getChainType(const string, istream&, CardFactory*);
+    void addChain(const int, Card*);
 };
 
 #endif

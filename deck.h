@@ -5,14 +5,12 @@
 #include "card.h"
 #include "cardFactory.h"
 
-//class cardFactory;
-
 class Deck : public vector<Card*> {
 public:
+	Deck() {}; // default constructor
 	Deck(istream&, CardFactory*);
 	Card* draw();
 	friend ostream & operator << (ostream &, Deck);
-	Deck() {}; // default constructor
 	Deck(CardFactory*);
 };
 #endif

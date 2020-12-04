@@ -7,18 +7,16 @@
 
 class Table {
 public:
-	Player p1;
-	Player p2;
-    Deck deck;
-    DiscardPile dPile;
-    TradeArea tArea; 
-	//Table(Player _p1, Player _p2, Deck _d, DiscardPile _dp, TradeArea _ta); // Testing?
-    Table(){};
+	Player p1; // Object for player1
+	Player p2; // Object for player2 
+    Deck deck; // Object for deck 
+    DiscardPile dPile; // Object for discard pile 
+    TradeArea tArea; // Object for trade area
+    Table(){}; // Default constructor 
     Table(istream&, CardFactory*);
     bool win(string&) const;
 	void printHand(bool);
     friend ostream& operator<<( ostream&, Table*);
-	//Helper function//
-	void printAll(ostream&);
+	void printAll(ostream&); // Helper function //
 };
 #endif

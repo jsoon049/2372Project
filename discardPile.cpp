@@ -8,7 +8,7 @@ DiscardPile::DiscardPile(istream &is, CardFactory *cardfactory) {
 }
 
 // Discards the card to the pile 
-DiscardPile & DiscardPile::operator+=(Card *card) {
+DiscardPile& DiscardPile::operator+=(Card *card) {
 	(*this).push_back(card); // Add card to top of discard pile
 	return *this;
 }
@@ -27,12 +27,15 @@ Card *DiscardPile::pickUp() {
 }
 
 // Returns but does not remove the top card from the discard pile
-Card *DiscardPile::top(){ return (*this).back(); }
+Card *DiscardPile::top(){ 
+    if(!this->empty()) return (*this).back(); 
+    else return nullptr;
+}
 
 // Insert all the cards in the DiscardPile to an std::ostream.
 void DiscardPile::print(ostream &output) {
-     for( auto card : *this ) { 
-        card->print(output); // Print first letter of all cards
+     for(Card *card : *this ) { 
+        card->print(output); // Print first letter of all cards in discard pile
         output<< " ";
     }
     cout << endl;

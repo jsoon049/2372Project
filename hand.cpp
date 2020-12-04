@@ -2,7 +2,7 @@
 //** TOP CARD IS FRONT OF QUEUE **//
 
 // Constructor which accepts an istream and reconstruct the Hand from file.
-Hand::Hand( istream& is, CardFactory* cardFactory ) {
+Hand::Hand(istream& is, CardFactory* cardFactory) {
     char card;
     while(is >> card) hand.push(cardFactory->getCardType(card));  // loop terminates when end of line or invalid input
 }
@@ -41,7 +41,7 @@ Card* Hand::operator[](int num) {
     if(num < 0 || num >= hand.size()) cout << "Index out of bounds!" << endl;
     else {
         for(int i=0; i<= hand.size(); i++) { 
-            if(i == num) wantedCard = hand.front(); // store Card if we found index we are looking for
+            if(i == num) wantedCard = hand.front(); // Set variable wantedCard if we find index we are looking for
             else hand.push(hand.front()); // copy front card to back
             hand.pop(); // remove front card
         }

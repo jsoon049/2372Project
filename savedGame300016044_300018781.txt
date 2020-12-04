@@ -1,20 +1,20 @@
 Player1 
-Name : Jeremy
-Coins : 0
-Chains : 
-Stink	S 
-Blue	B B B 
-Hand : C B G B R s B 
-
-Player2 
-Name : Amy
+Name : jeremy
 Coins : 0
 Chains : 
 Green	G G 
-Stink	S 
-Hand : s G C S G C C 
+Blue	B B B B B 
+Hand : C g S S B B S 
 
-DiscardPile : R C S C 
-TradeArea : B g R g 
-Deck : s G S S s S R s s C R B C b B B B s G B G C G g B S b S S s B b S g S g b B G S s g B b b b S B C B S R b s B C b s C R R G G C b G B C C C 
+Player2 
+Name : amy
+Coins : 0
+Chains : 
+soy	s s s s s s s 
+Stink	S S 
+Hand : B b G G G R g g 
+
+DiscardPile : b R S G b b S 
+TradeArea : C g g 
+Deck : B B s B B B R B C C R C B C S C B R S C G R C G S b C b s S S g G s C B C C C C R b b b G S B S B R G C s S s S G b 
 done

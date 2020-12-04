@@ -14,6 +14,7 @@ void pauseSave(Table& t) {
     while(true) {
         cout << "Do you want to pause and save the game?" << endl;
         cin >> ans;
+        cout << endl;
         if(ans == "No" || ans == "no") break;
         if(ans == "Yes" || ans == "yes") {
             ofstream outFile("savedGame300016044_300018781.txt"); // Open file
@@ -128,7 +129,7 @@ int main(void) {
         pauseSave(*gameTable); // If pause, save game to file and exit
 
         if(playerTurn == 1) { //Player1 turn
-            cout << "It is " << gameTable->p1.getName() << "'s turn!" << endl;
+            cout << "It's " << gameTable->p1.getName() << "'s turn!" << endl;
             // If possible ask user if they want to buy third chain
             if((gameTable->p1.getNumCoins() >= 3) && (gameTable->p1.getMaxNumChains()<3)) {
                 while(true){
@@ -146,20 +147,26 @@ int main(void) {
             cout << "Current hand: ";
             gameTable->p1.printHand(cout, true);
             cout << endl;
-             
+            
             // If TradeArea is not empty
             if(gameTable->tArea.numCards()!=0) {
                 // Loop through all cards in tradeArea
                 for(auto itr = gameTable->tArea.cardTypes.begin(); itr != gameTable->tArea.cardTypes.end(); itr = gameTable->tArea.cardTypes.erase(itr)) {
-                    cout << "Do you want to add " << *itr << " bean from trade area to a chain? (yes or no)" << endl;
-                    cin >> ans;
                     Card* chainOrDiscard = gameTable->tArea.trade(*itr);
                     if(chainOrDiscard != nullptr) {
+                        cout << "Do you want to add " << *itr << " bean from trade area to a chain? (yes or no)" << endl;
+                        cin >> ans;
                         // If yes add all cards of bean type T to chain
-                        if(ans == "yes" || ans == "Yes") addToChain(gameTable->p1, *gameTable, -1, chainOrDiscard);
-                        else {
-                            cout << "Discarding " << chainOrDiscard->getName() << " bean from tradeArea" << endl;
-                            gameTable->dPile += chainOrDiscard; // If no discard all cards in trade area of type T
+                        while(true) {
+                            if(ans == "yes" || ans == "Yes") { 
+                                addToChain(gameTable->p1, *gameTable, -1, chainOrDiscard); 
+                                break;
+                            }
+                            else if(ans == "no" || ans == "No") {
+                                cout << "Discarding " << chainOrDiscard->getName() << " bean from tradeArea" << endl;
+                                gameTable->dPile += chainOrDiscard; // If no discard all cards in trade area of type T
+                                break;
+                            }
                         }
                     }
                 }
@@ -179,21 +186,25 @@ int main(void) {
             cout << endl;
             cout << "Do you want to add this new top card to a chain? (yes or no)" << endl;
             cin >> ans;
-            if(ans == "yes" || ans == "Yes") {
-                cardToChain = gameTable->p1.hand.play();
-                addToChain(gameTable->p1, *gameTable, -1, cardToChain);
+            while(true){
+                if(ans == "yes" || ans == "Yes") {
+                    cardToChain = gameTable->p1.hand.play();
+                    addToChain(gameTable->p1, *gameTable, -1, cardToChain);
+                    break;
+                }
+                if(ans == "no" || ans == "No") break;
             }
 
             // If player decides to show the player's full hand they can select an arbitrary card
             // and discard it from the player's hand and place it on the discard pile.
             cout << "If you show your hand you can discard one arbitrary card from it to the discard pile." << endl;
-            cout << "Would you like to do that? (yes or no)" << endl;
+            cout << "Do you want to do that? (yes or no)" << endl;
             cin >> ans;
             if(ans == "yes" || ans == "Yes") {
                 cout << "Current hand: ";
                 gameTable->p1.printHand(cout, true); cout << endl;
                 while(gameTable->p1.hand.hand.empty() == false) {
-                    position = 1;
+                    position = rand() % (gameTable->p1.hand.hand.size()-1);
                     Card* discardCard = gameTable->p1.hand[position];
                     if(discardCard == nullptr) position = 0;
                     else if(discardCard != nullptr) {
@@ -210,7 +221,7 @@ int main(void) {
             // Draw three cards from the deck and place cards in the trade area
             cout << "Drawing three cards from deck and placing them in trade area" << endl;
             for(int i = 0; i < 3; i++) {
-                if(!gameTable->deck.empty()) gameTable->tArea+=(gameTable->deck.draw());
+                if(!(gameTable->deck.empty())) gameTable->tArea+=(gameTable->deck.draw());
             }
 
             // While top card of discard pile matches an existing card in the trade area
@@ -219,23 +230,28 @@ int main(void) {
                 cout << "So we draw the top-most card from the discard pile and place it in the trade area" << endl;
                 gameTable->tArea += (gameTable->dPile.pickUp()); // Draw the top-most card from the discard pile and place it in the trade area
             }
-            cout << "Trade Area: "; cout << gameTable->tArea << endl;
+            cout << "Trade Area: "; 
+            cout << (gameTable->tArea) << endl;
 
             // While the trade area is not empty
             if(gameTable->tArea.numCards() != 0) {
                 for(auto itr = gameTable->tArea.cardTypes.begin(); itr != gameTable->tArea.cardTypes.end();) {
-                    cout << "Do you want to add " << *itr << " from trade area to one of your chains? (yes or no)" << endl; // Ask a user if they want to add each card to your chain,
-                    cin >> ans;
-                    if(ans == "yes" || ans == "Yes") {
-                        Card* chainOrDiscard = gameTable->tArea.trade(*itr);
-                        while(chainOrDiscard != nullptr) {
-                            addToChain(gameTable->p1, *gameTable, -1, chainOrDiscard);
-                            chainOrDiscard = gameTable->tArea.trade(*itr);
+                    while(true){
+                        cout << "Do you want to add " << *itr << " from trade area to one of your chains? (yes or no)" << endl; // Ask a user if they want to add each card to your chain,
+                        cin >> ans;
+                        if(ans == "yes" || ans == "Yes") {
+                            Card* chainOrDiscard = gameTable->tArea.trade(*itr);
+                            if(chainOrDiscard != nullptr) {
+                                addToChain(gameTable->p1, *gameTable, -1, chainOrDiscard);
+                                chainOrDiscard = gameTable->tArea.trade(*itr);
+                            }
+                            gameTable->tArea.cardTypes.erase(itr);       
+                            break;
                         }
-                        gameTable->tArea.cardTypes.erase(itr);
-                        itr++;
-                    } 
-                    else itr++; // If user doesn't want to add card to chain then leave it for the next player.
+                        if(ans == "no" || ans == "No") break;
+                    }
+                    ++itr;
+                    //else ++itr; // If user doesn't want to add card to chain then leave it for the next player.
                 }
             }
 
@@ -280,7 +296,7 @@ int main(void) {
             if(gameTable->tArea.numCards()!=0) {
                 // Loop through all cards in tradeArea
                 for(auto itr = gameTable->tArea.cardTypes.begin(); itr != gameTable->tArea.cardTypes.end(); itr = gameTable->tArea.cardTypes.erase(itr)) {
-                    cout << "Do you want to add " << *itr << " bean to a chain? (yes or no)" << endl;
+                    cout << "Do you want to add " << *itr << " bean from trade area to a chain? (yes or no)" << endl;
                     cin >> ans;
                     Card* chainOrDiscard = gameTable->tArea.trade(*itr);
                     if(chainOrDiscard != nullptr) {
@@ -293,12 +309,11 @@ int main(void) {
                     }
                 }
             }
-            cout << endl;
 
             // Play topmost card
-            cout << "Playing top card from hand: ";
+            cout << endl << "Playing top card: ";
             gameTable->p2.printHand(cout ,false); // Print top card
-            cout << endl;
+            cout << " from hand" << endl;
             cardToChain = gameTable->p2.hand.play(); // Remove top card from player's hand
             addToChain(gameTable->p2, *gameTable, -1, cardToChain);
 
@@ -322,7 +337,7 @@ int main(void) {
                 cout << "Current hand: ";
                 gameTable->p2.printHand(cout, true); cout << endl;
                 while(gameTable->p2.hand.hand.empty() == false) {
-                    position = 1;
+                    position = rand() % (gameTable->p2.hand.hand.size()-1);
                     Card* discardCard = gameTable->p2.hand[position];
                     if(discardCard == nullptr) position = 0;
                     else if(discardCard != nullptr) {
@@ -353,18 +368,22 @@ int main(void) {
             // While the trade area is not empty
             if(gameTable->tArea.numCards() != 0) {
                 for(auto itr = gameTable->tArea.cardTypes.begin(); itr != gameTable->tArea.cardTypes.end();) {
-                    cout << "Do you want to add " << *itr << " to one of your chains? (yes or no)" << endl; // Ask a user if they want to add each card to your chain,
-                    cin >> ans;
-                    if(ans == "yes" || ans == "Yes") {
-                        Card* chainOrDiscard = gameTable->tArea.trade(*itr);
-                        while(chainOrDiscard != nullptr) {
-                            addToChain(gameTable->p2, *gameTable, -1, chainOrDiscard);
-                            chainOrDiscard = gameTable->tArea.trade(*itr);
+                    while(true){
+                        cout << "Do you want to add " << *itr << " from trade area to one of your chains? (yes or no)" << endl; // Ask a user if they want to add each card to your chain,
+                        cin >> ans;
+                        if(ans == "yes" || ans == "Yes") {
+                            Card* chainOrDiscard = gameTable->tArea.trade(*itr);
+                            if(chainOrDiscard != nullptr) {
+                                addToChain(gameTable->p2, *gameTable, -1, chainOrDiscard);
+                                chainOrDiscard = gameTable->tArea.trade(*itr);
+                            }
+                            gameTable->tArea.cardTypes.erase(itr);       
+                            break;
                         }
-                        gameTable->tArea.cardTypes.erase(itr);
-                        itr++;
-                    } 
-                    else itr++; // If user doesn't want to add card to chain then leave it for the next player.
+                        if(ans == "no" || ans == "No") break;
+                    }
+                    ++itr;
+                    //else ++itr; // If user doesn't want to add card to chain then leave it for the next player.
                 }
             }
 

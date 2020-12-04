@@ -1,12 +1,13 @@
 #include "deck.h"
 
+//** TOP CARD IS BACK OF VECTOR **//
+
 // Constructor which accepts an istream and reconstructs the deck from file.
 Deck::Deck(istream &is, CardFactory *cardfactory) { 
 	*this = cardfactory->auxLoadDeck(is); 
 }
 
 // Draws top card from deck if not empty, else print error message
-//** TOP CARD IS BACK OF VECTOR **//
 Card* Deck::draw() {
 	if (this->empty()) {
 		cout << "Error: Deck is empty!" << endl;

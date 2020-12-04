@@ -7,9 +7,9 @@
 
 class TradeArea {
 public:
-    list<Card*> cardList; // list of cards to store cards in TradeArea
-    list<string> cardTypes; // list of strings to store types of cards in TradeArea
-    TradeArea(){}; // default constructor
+    list<Card*> cardList; // List of cards to store cards in TradeArea
+    list<string> cardTypes; // List of strings to store types of cards in TradeArea
+    TradeArea(){}; // Default constructor
     TradeArea( istream&, CardFactory*);
     TradeArea& operator+=(Card*);
     bool legal(Card*);

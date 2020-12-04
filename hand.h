@@ -7,7 +7,7 @@
 
 class Hand : public vector<Card*> {
 public:
-    queue<Card*> hand;
+    queue<Card*> hand; // Queue used to store all cards in a player's hand
     Hand() = default;   
     Hand(istream&, CardFactory*);   
     Hand& operator+=(Card*);       

@@ -2,13 +2,6 @@
 #define chain_h
 #include <vector>
 #include "chainBase.h"
-#include <exception>
-
-// class IllegalType : public exception {
-//     const char * err () const throw () { 
-//         return "Type Error: Card type does not match chain type!"; 
-//     }
-// } IllegalType;
 
 template <class T>
 class Chain : public ChainBase {

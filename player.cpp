@@ -106,6 +106,20 @@ ostream& operator<<(ostream& out, const Player& p) {
 }
 
 //**HELPER FUNCTIONS**//
+
+// Returns reconstructed chain. Used as helper function in istream constructor
+ChainBase* Player::getChainType(const string cType, istream& is, CardFactory* cardfactory) {
+    if(cType == "black") return new Chain<black>(is, cardfactory);
+    else if(cType == "Blue") return new Chain<Blue>(is, cardfactory);
+    else if(cType == "Chili") return new Chain<Chili>(is, cardfactory);
+    else if(cType == "garden") return new Chain<garden>(is, cardfactory);
+    else if(cType == "Green") return new Chain<Green>(is, cardfactory);
+    else if(cType == "Red") return new Chain<Red>(is, cardfactory);
+    else if(cType == "soy") return new Chain<soy>(is, cardfactory);
+    else if(cType == "Stink") return new Chain<Stink>( is, cardfactory);
+    else return new ChainBase(true);
+}
+
 // Creates a chain at position i and adds the first card of type T to newly created chain<T>
 void Player::addChain(const int pos, Card* firstCard) {
     delete playerChains[pos]; // Delete empty chain
@@ -121,17 +135,4 @@ void Player::addChain(const int pos, Card* firstCard) {
     else chain = new Chain<Stink>();
     *chain += firstCard;  // add card to new chain
     playerChains[pos] = chain;
-}
-
-// Returns reconstructed chain. Used as helper function in istream constructor
-ChainBase* Player::getChainType(const string cType, istream& is, CardFactory* cardfactory) {
-    if(cType == "black") return new Chain<black>(is, cardfactory);
-    else if(cType == "Blue") return new Chain<Blue>(is, cardfactory);
-    else if(cType == "Chili") return new Chain<Chili>(is, cardfactory);
-    else if(cType == "garden") return new Chain<garden>(is, cardfactory);
-    else if(cType == "Green") return new Chain<Green>(is, cardfactory);
-    else if(cType == "Red") return new Chain<Red>(is, cardfactory);
-    else if(cType == "soy") return new Chain<soy>(is, cardfactory);
-    else if(cType == "Stink") return new Chain<Stink>( is, cardfactory);
-    else return new ChainBase(true);
 }

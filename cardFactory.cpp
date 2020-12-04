@@ -68,7 +68,7 @@ Card* CardFactory::getCardType(char bean) {
 	return card;
 }
 
-// Helper function used when we are loading out deck from file
+// Helper function used when we are loading our deck from a file
 Deck CardFactory::auxLoadDeck(istream &is) {
 	int i = 0;
 	d = new Deck();
