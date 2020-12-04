@@ -10,7 +10,7 @@ Player2
 Name : amy
 Coins : 0
 Chains : 
-soy	s s s s s s s 
+soy	    s s s s s s s 
 Stink	S S 
 Hand : B b G G G R g g 
 

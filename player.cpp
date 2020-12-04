@@ -32,11 +32,8 @@ Player::Player(istream& is, CardFactory* cardfactory):playerChains{} {
                 hand = Hand( sBuff, cardfactory ); break;
             }
             else { // Create chains
-                //sBuff >> temp;
                 if(firstWord == "Empty") { playerChains.push_back( new ChainBase() ); break; }
                 else {
-                    //sBuff >> firstWord;
-                    //sBuff >> temp; // should store ":"
                     playerChains.push_back(getChainType(firstWord, sBuff, cardfactory)); break;
                 }
             }
@@ -98,8 +95,6 @@ ostream& operator<<(ostream& out, const Player& p) {
     out << "Chains : " << endl;
     int i = 0;
     for(auto iter = p.playerChains.begin(); iter != p.playerChains.end(); iter++) {  
-        //out << i+1 << " - " << *(*iter) << endl; i++; // Print player's chains with their position (chain1, chain2, or chain3)
-                                                      // This line prints all chains including empty chains
         out << *(*iter) << endl; i++; // Print player's chains including empty chains
     }
     return out;
