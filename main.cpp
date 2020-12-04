@@ -27,17 +27,17 @@ void pauseSave(Table& t) {
 }
 
 // Function used to load saved game file from pre-specified file. Returns table with loaded info
-Table* loadGame (CardFactory *cf) {
+Table* loadFromSave (CardFactory *cf) {
     ifstream inFile("savedGame300016044_300018781.txt"); // Open file
     if (inFile.is_open()) {
-		Table* table = new Table(inFile, cf);
+		Table* table = new Table(inFile, cf); // Load table from file
 		return table;
 	}
 	else return NULL;
 }
 
 // Add card to specified chain
-void addToChain(Player& p, Table& table, int index, Card* cardToChain) {
+void addCardToChain(Player& p, Table& table, int index, Card* cardToChain) {
     while(index < 0 || index >= p.getMaxNumChains()) {
         if(p.getMaxNumChains() == 2) {
             cout << "You currently own two chains." << endl;
@@ -76,7 +76,7 @@ void addToChain(Player& p, Table& table, int index, Card* cardToChain) {
                 p+=coinsEarned;
                 p.addChain(index, cardToChain);
             }
-            else{addToChain(p, table, -1, cardToChain); }
+            else{addCardToChain(p, table, -1, cardToChain); }
         }
     }
 }
@@ -132,7 +132,7 @@ int main(void) {
             gameTable->p2.hand+=(gameTable->deck.draw());
         }
     }
-    else gameTable = loadGame(cf->getFactory()); // Load paused game from file.
+    else gameTable = loadFromSave(cf->getFactory()); // Load paused game from file.
     
     // Start game
     while(!gameTable->win(winner)) {
@@ -172,7 +172,7 @@ int main(void) {
                         // If yes add all cards of bean type T to chain
                         while(true) {
                             if(ans == "yes" || ans == "Yes") { 
-                                addToChain(gameTable->p1, *gameTable, -1, chainOrDiscard); 
+                                addCardToChain(gameTable->p1, *gameTable, -1, chainOrDiscard); 
                                 break;
                             }
                             else if(ans == "no" || ans == "No") {
@@ -191,7 +191,7 @@ int main(void) {
             gameTable->p1.printHand(cout ,false); // Print top card
             cout << " from hand" << endl;
             cardToChain = gameTable->p1.hand.play(); // Remove top card from player's hand
-            addToChain(gameTable->p1, *gameTable, -1, cardToChain);
+            addCardToChain(gameTable->p1, *gameTable, -1, cardToChain);
 
             // If player wants they can play the now topmost card from Hand.
             cout << "New Top card in hand: ";
@@ -202,7 +202,7 @@ int main(void) {
             while(true){
                 if(ans == "yes" || ans == "Yes") {
                     cardToChain = gameTable->p1.hand.play();
-                    addToChain(gameTable->p1, *gameTable, -1, cardToChain);
+                    addCardToChain(gameTable->p1, *gameTable, -1, cardToChain);
                     break;
                 }
                 if(ans == "no" || ans == "No") break;
@@ -255,7 +255,7 @@ int main(void) {
                         if(ans == "yes" || ans == "Yes") {
                             Card* chainOrDiscard = gameTable->tArea.trade(*itr);
                             if(chainOrDiscard != nullptr) {
-                                addToChain(gameTable->p1, *gameTable, -1, chainOrDiscard);
+                                addCardToChain(gameTable->p1, *gameTable, -1, chainOrDiscard);
                                 chainOrDiscard = gameTable->tArea.trade(*itr);
                             }
                             gameTable->tArea.cardTypes.erase(itr);       
@@ -314,7 +314,7 @@ int main(void) {
                     Card* chainOrDiscard = gameTable->tArea.trade(*itr);
                     if(chainOrDiscard != nullptr) {
                         // If yes add all cards of bean type T to chain
-                        if(ans == "yes" || ans == "Yes") addToChain(gameTable->p2, *gameTable, -1, chainOrDiscard);
+                        if(ans == "yes" || ans == "Yes") addCardToChain(gameTable->p2, *gameTable, -1, chainOrDiscard);
                         else {
                             cout << "Discarding " << chainOrDiscard->getName() << " bean from tradeArea" << endl;
                             gameTable->dPile += chainOrDiscard; // If no discard all cards in trade area of type T
@@ -328,7 +328,7 @@ int main(void) {
             gameTable->p2.printHand(cout ,false); // Print top card
             cout << " from hand" << endl;
             cardToChain = gameTable->p2.hand.play(); // Remove top card from player's hand
-            addToChain(gameTable->p2, *gameTable, -1, cardToChain);
+            addCardToChain(gameTable->p2, *gameTable, -1, cardToChain);
 
             // If player wants they can play the now topmost card from Hand.
             cout << "New Top card in hand: ";
@@ -338,7 +338,7 @@ int main(void) {
             cin >> ans;
             if(ans == "yes" || ans == "Yes") {
                 cardToChain = gameTable->p2.hand.play();
-                addToChain(gameTable->p2, *gameTable, -1, cardToChain);
+                addCardToChain(gameTable->p2, *gameTable, -1, cardToChain);
             }
 
             // If player decides to show the player's full hand they can select an arbitrary card
@@ -387,7 +387,7 @@ int main(void) {
                         if(ans == "yes" || ans == "Yes") {
                             Card* chainOrDiscard = gameTable->tArea.trade(*itr);
                             if(chainOrDiscard != nullptr) {
-                                addToChain(gameTable->p2, *gameTable, -1, chainOrDiscard);
+                                addCardToChain(gameTable->p2, *gameTable, -1, chainOrDiscard);
                                 chainOrDiscard = gameTable->tArea.trade(*itr);
                             }
                             gameTable->tArea.cardTypes.erase(itr);       
@@ -414,10 +414,9 @@ int main(void) {
         }
     }
 
-	if (winner == "Tie") cout << "Congratulations to the both of you!" << endl;
-	else cout << "Congratulations " << winner << ". You've won!" << endl;
+	if (winner == "Tie") cout << "It's a TIE!" << endl;
+	else cout << "Congratulations " << winner << ". You're the winner!" << endl;
 	delete gameTable;
-	// delete players[0];
-	// delete players[1];
+    delete cf;
 	return 0;
 }

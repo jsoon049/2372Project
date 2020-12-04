@@ -1,20 +1,22 @@
 Player1 
 Name : jeremy
-Coins : 1
+Coins : 3
 Chains : 
-Green	G G G 
+Stink	S S 
 Chili	C C 
-Hand : g S B B S b S s 
+Blue	B B 
+Hand : b S s S b R s S s 
 
 Player2 
 Name : amy
 Coins : 4
 Chains : 
-Green	G 
-Stink	S S S S 
-Hand : G G G R g g C S B 
+garden	g 
+Stink	S S S S S 
+Chili	C C C 
+Hand : g C S B C B C b G C 
 
-DiscardPile : b R S G b b S g g b 
-TradeArea : R B 
-Deck : B B s B B B R B C C R C B C S C B R S C G R C G S b C b s S S g G s C B C C C C R b b b G S 
+DiscardPile : b R S G b b S g g b R B b b g 
+TradeArea : b 
+Deck : B B s B B B R B C C R C B C S C B R S C G R 
 done
