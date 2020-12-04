@@ -1,8 +1,7 @@
 #include <string.h>
-#include "chain.h"
 #include "hand.cpp"
 #include "tradeArea.cpp"
-#include "player.cpp"
+#include "table.cpp"
 // While there are still cards on the Deck if pause save game to file and exit For each Player
 // Display Table
 // Player draws top card from Deck If TradeArea is not empty
@@ -127,27 +126,46 @@ int main() {
     // ta.trade(g3->getName()); //trade from front of list
     // cout << ta << endl;
 
-    //TEST PLAYER   
-    Player pl = Player("jeremy");
-    pl += 5; //five coins
-    pl.buyThirdChain();
-    for (int i = 0; i < 4; i++) {
-        Green *g1 = new Green();
-        (pl.hand)+=g1;
-    }
-    for (int i = 0; i < 4; i++) {
-        Blue *B1 = new Blue();
-        (pl.hand)+=B1;
-    }
-    pl.printHand(cout, true);
-    cout << endl;
-    Card *r1 = new Red(), *s1 = new soy();
-    pl.addChain(0,r1);
-    pl.addChain(1,s1);
-    cout << pl << endl;
-    stringstream save;
-    save << pl;
-    Player pl2 = Player(save, CardFactory::getFactory());
-    cout << pl2 << endl;
-    return 0;
+    // //TEST PLAYER   
+    // Player pl = Player("jeremy");
+    // pl += 5; //five coins
+    // pl.buyThirdChain();
+    // for (int i = 0; i < 4; i++) {
+    //     Green *g1 = new Green();
+    //     (pl.hand)+=g1;
+    // }
+    // for (int i = 0; i < 4; i++) {
+    //     Blue *B1 = new Blue();
+    //     (pl.hand)+=B1;
+    // }
+    // pl.printHand(cout, true);
+    // cout << endl;
+    // Card *r1 = new Red(), *s1 = new soy();
+    // pl.addChain(0,r1);
+    // pl.addChain(1,s1);
+    // cout << pl << endl;
+    // stringstream save;
+    // save << pl;
+    // Player pl2 = Player(save, CardFactory::getFactory());
+    // cout << pl2 << endl;
+    // return 0;
+
+    // //TEST TABLE
+    Player p1, p2;
+	Deck deck;
+	DiscardPile discardPile;
+	TradeArea tradeArea;
+	CardFactory *cardFactory;
+	Table table;
+    p1 = Player("David");
+    p1 += 5;
+	p2 = Player("Caleb");
+    p2 += 3;
+	discardPile = DiscardPile();
+	tradeArea = TradeArea();
+	cardFactory = CardFactory::getFactory();
+	deck = cardFactory->getDeck();
+    table = Table(p1, p2, deck, discardPile, tradeArea);
+    table.printAll(cout);
+    //cout << table << endl;
 }

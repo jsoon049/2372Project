@@ -3,7 +3,8 @@
 
 #include <random>
 #include <chrono>
- 
+#include "card.h"
+
 class Deck;
 
 class CardFactory {

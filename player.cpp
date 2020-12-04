@@ -19,8 +19,8 @@ Player::Player(const string &name) { playerName = name; }
 // Constructor which accepts an istream and reconstructs the Player from file
 Player::Player(istream& is, CardFactory* cardfactory):playerChains{} {
     string temp; // Used to store second word of line, which is a colon
-    string firstWord; // Stores first firstWord of each text
-    string text; // Stores the whole text of text
+    string firstWord; // Stores first word of each line
+    string text; // Stores each line
     while(getline(is, text)) { // Extract text until newline is found
         istringstream sBuff(text); // String buffer containing text variable
         while(sBuff >> firstWord) {

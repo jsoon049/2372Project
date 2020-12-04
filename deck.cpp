@@ -20,8 +20,8 @@ Card* Deck::draw() {
 }
 
 // Insertion operator (friend) to insert all the cards in the deck to an std::ostream.
-ostream & operator<<(ostream & os, Deck *d) {
-	for( auto card : *d ) { card->print(os); os << " "; }
+ostream & operator<<(ostream & os, Deck d) {
+	for(Card* card : d) { card->print(os); os << " "; }
     return os;
 }
 

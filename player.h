@@ -1,8 +1,8 @@
 #ifndef player_h
 #define player_h
-#include <sstream>
 #include "chain.h"
 #include "hand.h"
+#include <sstream>
 
 // class Player;
 // ostream& operator<<( ostream&, const Player& );
