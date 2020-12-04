@@ -1,17 +1,22 @@
 #include "card.h"
 #include "cardFactory.h"
 
-class ChainBase {
+// class ChainBase;
+// ostream& operator<<( ostream&, const ChainBase& );
+
+class ChainBase { 
 protected:
-	virtual void print(ostream&) const = 0;
+    bool base = true; // true if object is of type ChainBase. False if object is of type Chain<T>
 public:
-	virtual int sell() = 0;
-	friend ostream & operator << (ostream &os, const ChainBase& chain_base) {
-		chain_base.print(os);
-		return os;
-	};
-	ChainBase& operator+= (Card* card) {
-		*this+=(card);
-		return *this;
-	};
+    ChainBase(){};  // Default constructor
+    ChainBase( bool b ) : base(b) {};  // Constructor with bool variable
+    bool isEmpty() { return base; };  // Returns true if object is of type ChainBase, false if object is of Chain<T>.
+    virtual void print(ostream& o) { o << "Empty chain"; };  // Prints ChainBase - Used when we print empty chains
+    virtual int sell() { return 0; };
+    virtual ChainBase& operator+=(Card* c) { return *this; }; // Return *this because Chain<T> has not been initialized
+    // Insertion operator to print Chain on an std::ostream. 
+    friend ostream& operator<<(ostream& o, ChainBase& cb) {
+        cb.print(o);
+        return o;
+    };
 };

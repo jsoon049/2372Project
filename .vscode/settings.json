@@ -58,6 +58,10 @@
         "vector": "cpp",
         "iterator": "cpp",
         "queue": "cpp",
-        "list": "cpp"
+        "list": "cpp",
+        "__node_handle": "cpp",
+        "deque": "cpp",
+        "hash_map": "cpp",
+        "string": "cpp"
     }
 }

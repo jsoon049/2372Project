@@ -1,9 +1,8 @@
 #include <string.h>
-#include <sstream> 
 #include "chain.h"
 #include "hand.cpp"
-#include "discardPile.cpp"
 #include "tradeArea.cpp"
+#include "player.cpp"
 // While there are still cards on the Deck if pause save game to file and exit For each Player
 // Display Table
 // Player draws top card from Deck If TradeArea is not empty
@@ -127,6 +126,27 @@ int main() {
     // cout << ta.numCards() << endl;
     // ta.trade(g3->getName()); //trade from front of list
     // cout << ta << endl;
-    
+
+    //TEST PLAYER   
+    Player pl = Player("jeremy");
+    pl += 5; //five coins
+    pl.buyThirdChain();
+    for (int i = 0; i < 4; i++) {
+        Green *g1 = new Green();
+        (pl.hand)+=g1;
+    }
+    for (int i = 0; i < 4; i++) {
+        Blue *B1 = new Blue();
+        (pl.hand)+=B1;
+    }
+    //pl.printHand(cout, true);
+    Card *r1 = new Red(), *s1 = new soy();
+    pl.addChain(0,r1);
+    pl.addChain(1,s1);
+    //cout << pl << endl;
+    stringstream save;
+    save << pl;
+    Player pl2 = Player(save, CardFactory::getFactory());
+    cout << endl << pl2 << endl;
     return 0;
 }
