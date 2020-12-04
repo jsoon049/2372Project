@@ -151,21 +151,21 @@ int main() {
     // return 0;
 
     // //TEST TABLE
-    Player p1, p2;
-	Deck deck;
-	DiscardPile discardPile;
-	TradeArea tradeArea;
-	CardFactory *cardFactory;
-	Table table;
-    p1 = Player("David");
-    p1 += 5;
-	p2 = Player("Caleb");
-    p2 += 3;
-	discardPile = DiscardPile();
-	tradeArea = TradeArea();
-	cardFactory = CardFactory::getFactory();
-	deck = cardFactory->getDeck();
-    table = Table(p1, p2, deck, discardPile, tradeArea);
-    table.printAll(cout);
+    // Player p1, p2;
+	// Deck deck;
+	// DiscardPile discardPile;
+	// TradeArea tradeArea;
+	// CardFactory *cardFactory;
+	// Table table;
+    // p1 = Player("David");
+    // p1 += 5;
+	// p2 = Player("Caleb");
+    // p2 += 3;
+	// discardPile = DiscardPile();
+	// tradeArea = TradeArea();
+	// cardFactory = CardFactory::getFactory();
+	// deck = cardFactory->getDeck();
+    // table = Table(p1, p2, deck, discardPile, tradeArea);
+    // table.printAll(cout);
     //cout << table << endl;
 }

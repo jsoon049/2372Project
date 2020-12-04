@@ -99,7 +99,7 @@ ostream& operator<<(ostream& out, Table& _table) {
  *  Deck : etc...
  *  end
  */
-void Table::printAll(ostream& out ) {
+void Table::printAll(ostream& out) {
     out << "Player1 " << endl << p1; // Print player1 info
     out << "Hand : "; p1.printHand(out, true); out << endl << endl; // Print all cards in player1 hand 
     out << "Player2 " << endl << p2; // Print player2 info
