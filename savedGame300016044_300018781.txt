@@ -1,0 +1,22 @@
+Player1 
+Name : Jeremy
+Coins : 6
+Chains : 
+black	b b b b 
+Chili	C C C C 
+soy	s s s s s s s s 
+Hand : g R B s C b B B R 
+
+Player2 
+Name : Amy
+Coins : 4
+Chains : 
+Blue	B B 
+Chili	C C C C C C C 
+garden	g g 
+Hand : R C B S G G C S C s B C 
+
+DiscardPile : G B S 
+TradeArea : s G s 
+Deck : S B R G G S S S C C 
+done
